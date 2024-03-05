@@ -1,0 +1,119 @@
+body {
+  font-family: "Arial", sans-serif;
+  background-color: #f7f7f7;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+
+.container {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  width: 300px;
+}
+
+.input-group {
+  margin-bottom: 10px;
+}
+
+.header h1,
+.shorten-btn {
+  font-size: 16px; /* Example size */
+  font-family: "Arial", sans-serif; /* Keeping the font family consistent */
+  color: #333; /* Example color */
+  margin: 0; /* Removing default margins */
+  padding-bottom: 5px; /* Space below the elements */
+}
+
+.input-group label,
+.header p,
+.shorten-btn {
+  font-size: 12px; /* Example size */
+  font-family: "Arial", sans-serif; /* Keeping the font family consistent */
+  color: #333; /* Example color */
+  margin: 10; /* Removing default margins */
+  padding-bottom: 5px; /* Space below the elements */
+}
+
+input[type="text"] {
+  width: calc(100% - 22px);
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+input[type="submit"],
+.shorten-btn {
+  width: 100%;
+  padding: 10px;
+  background-color: #4caf50;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+  font-family: "Arial", sans-serif; /* Ensuring the button font is consistent */
+}
+
+input[type="submit"]:hover,
+.shorten-btn:hover {
+  background-color: #45a049;
+}
+
+.shorten-btn:disabled {
+  background-color: #cccccc; /* Light grey, or choose another color that indicates it's disabled */
+  color: #666666; /* Darker grey text to indicate it's not active */
+  cursor: not-allowed; /* Shows a 'not allowed' cursor when hovering over the button */
+}
+
+.success-message {
+  margin-top: 20px;
+  font-size: 12px;
+  background-color: #e9e9e9;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.success-message p {
+  margin: 0;
+  margin-bottom: 5px;
+}
+
+.short-url {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.short-url input[type="text"] {
+  flex-grow: 1;
+  margin-right: 10px; /* Give some space between the text field and the button */
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+.copy-btn {
+  background-color: #1a73e8;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  padding: 10px 15px;
+  cursor: pointer;
+}
+
+.copy-btn:hover {
+  background-color: #1669c7;
+}
+
+.error{
+  color: red;
+  font-size: 12px;
+  margin-top: 5px;
+}
