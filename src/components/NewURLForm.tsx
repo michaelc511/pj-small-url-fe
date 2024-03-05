@@ -27,40 +27,14 @@ export function NewURLForm() {
     }
 
     try {
-      const shortUrl = await postData(newURL);
+      const shortUrl: any = await postData(newURL);
       setShortenedURL(shortUrl); // Update shortenedURL state with the returned short URL
     } catch (error) {
       console.error('Error shortening URL:', error);
       setErrorMsg("Error shortening URL");
     }
   }
-  
-  // function handleSubmit(e: any) {
-  //   e.preventDefault(); // prevents the default for page to refresh
-
-  //   // onSubmit(newURL)
-  //   if (!newURL) {
-  //     setErrorMsg("URL cannot be blank");
-  //     return;
-  //   }
-
-  //   if (
-  //     !newURL.startsWith("http://") &&
-  //     !newURL.startsWith("https://")
-  //   ) {
-  //     setErrorMsg(
-  //       "URL must start with 'http://' or 'https://'"
-  //     );
-  //     return;
-  //   }
-  //   setNewURL(newURL); // resets it to blank
-  //   setErrorMsg(""); // resets it to blank
-
-  //   const protocol: string = getProtocol(newURL);
-
-  //   setShortenedURL(protocol + "aaa"); // resets it to blank
-  // }
-
+ 
   function getProtocol(url: string) {
     const protocolEndIndex: number = url.indexOf("://");
     if (protocolEndIndex !== -1) {
@@ -92,7 +66,7 @@ export function NewURLForm() {
       >
         <div className="input-group">
           <label htmlFor="url">
-            URL {newURL} : {shortenedURL} :{" "}
+            URL  
             <span className="error">{errorMsg} </span>
           </label>
           <input
