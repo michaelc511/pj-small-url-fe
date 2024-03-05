@@ -1,5 +1,7 @@
 import { useState } from "react";
 
+import {postData} from "../utils/crud";
+
 export function NewURLForm() {
   // export function NewTodoForm(props) {
 
@@ -7,27 +9,57 @@ export function NewURLForm() {
   const [shortenedURL, setShortenedURL] = useState("");
   const [errorMsg, setErrorMsg] = useState("");
 
-  function handleSubmit(e: any) {
-    e.preventDefault(); // prevents the default for page to refresh
-  
 
-    // onSubmit(newURL)
-    if (!newURL) { 
-        setErrorMsg("URL cannot be blank");
-        return;
+  async function handleSubmit(e: any) {
+    e.preventDefault(); // Prevents the default page refresh
+
+    // Reset error message
+    setErrorMsg("");
+
+    if (!newURL) {
+      setErrorMsg("URL cannot be blank");
+      return;
     }
 
-    if (!newURL.startsWith("http://") && !newURL.startsWith("https://")) { 
-        setErrorMsg("URL must start with 'http://' or 'https://'"   )
-        return;
+    if (!newURL.startsWith("http://") && !newURL.startsWith("https://")) {
+      setErrorMsg("URL must start with 'http://' or 'https://'");
+      return;
     }
-    setNewURL(newURL); // resets it to blank
-    setErrorMsg(""); // resets it to blank
 
-    const protocol: string = getProtocol(newURL);
-
-    setShortenedURL(protocol + "aaa"); // resets it to blank
+    try {
+      const shortUrl = await postData(newURL);
+      setShortenedURL(shortUrl); // Update shortenedURL state with the returned short URL
+    } catch (error) {
+      console.error('Error shortening URL:', error);
+      setErrorMsg("Error shortening URL");
+    }
   }
+  
+  // function handleSubmit(e: any) {
+  //   e.preventDefault(); // prevents the default for page to refresh
+
+  //   // onSubmit(newURL)
+  //   if (!newURL) {
+  //     setErrorMsg("URL cannot be blank");
+  //     return;
+  //   }
+
+  //   if (
+  //     !newURL.startsWith("http://") &&
+  //     !newURL.startsWith("https://")
+  //   ) {
+  //     setErrorMsg(
+  //       "URL must start with 'http://' or 'https://'"
+  //     );
+  //     return;
+  //   }
+  //   setNewURL(newURL); // resets it to blank
+  //   setErrorMsg(""); // resets it to blank
+
+  //   const protocol: string = getProtocol(newURL);
+
+  //   setShortenedURL(protocol + "aaa"); // resets it to blank
+  // }
 
   function getProtocol(url: string) {
     const protocolEndIndex: number = url.indexOf("://");
@@ -48,7 +80,9 @@ export function NewURLForm() {
     <div className="container">
       <header className="header">
         <h1>URL Shortener</h1>
-        <p className="small-text">Enter the URL to shorten</p>{" "}
+        <p className="small-text">
+          Enter the URL to shorten
+        </p>{" "}
         {/* This line adds the top label */}
       </header>
 
@@ -58,7 +92,8 @@ export function NewURLForm() {
       >
         <div className="input-group">
           <label htmlFor="url">
-            URL {newURL} : {shortenedURL} : <span className='error'>{errorMsg} </span> 
+            URL {newURL} : {shortenedURL} :{" "}
+            <span className="error">{errorMsg} </span>
           </label>
           <input
             value={newURL}
@@ -94,6 +129,14 @@ export function NewURLForm() {
             </button>
           </div>
         </div>
+      )}
+      {shortenedURL && (
+        <button
+          onClick={() => setShortenedURL("")}
+          className="shorten-btn"
+        >
+          Add Another One
+        </button>
       )}
     </div>
   );
